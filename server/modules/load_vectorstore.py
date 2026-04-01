@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 from langchain_community.document_loaders import PyPDFLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter  # ✅ Fixed import
 from langchain_community.embeddings import HuggingFaceBgeEmbeddings
 from langchain_community.vectorstores import Chroma
 
@@ -26,7 +26,6 @@ def load_vectorstore(uploaded_files):
     """
     file_paths = []
 
-    # Save uploaded files to disk
     for file in uploaded_files:
         save_path = Path(UPLOAD_DIR) / file.filename
         with open(save_path, "wb") as f:
@@ -53,7 +52,6 @@ def load_vectorstore(uploaded_files):
 
     print(f"🔍 Embedding {len(all_chunks)} total chunks...")
 
-    # Load existing vectorstore or create new
     vectorstore = Chroma.from_documents(
         documents=all_chunks,
         embedding=EMBEDDING_MODEL,

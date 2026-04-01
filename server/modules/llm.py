@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from langchain.prompts import PromptTemplate
+from langchain_core.prompts import PromptTemplate  # ✅ Fixed import
 from langchain.chains import RetrievalQA
 from langchain_groq import ChatGroq
 
