@@ -70,3 +70,12 @@ def get_vectorstore():
         persist_directory=PERSIST_DIR,
         embedding_function=EMBEDDING_MODEL
     )
+    
+def get_vectorstore():
+    pc = Pinecone(api_key=os.environ["PINECONE_API_KEY"])
+    index = pc.Index(os.environ["PINECONE_INDEX_NAME"])
+    embed_model = GoogleGenerativeAIEmbeddings(
+        model="models/embedding-001",
+        google_api_key=os.environ["GOOGLE_API_KEY"]
+    )
+    return index, embed_model
